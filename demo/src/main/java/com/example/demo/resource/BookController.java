@@ -27,6 +27,11 @@ public class BookController {
 
     @GetMapping("/findAllBooks/{id}")
     public Optional<Book> getBook(@PathVariable int id) {
+
+        if(repository.findById(id) == null)
+        {
+            System.out.println(" No book found");
+        }
         return repository.findById(id);
     }
 
