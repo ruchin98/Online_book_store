@@ -38,6 +38,8 @@ public class BookController {
 
     @PutMapping("/put/{id}")
     public String updateBook(@PathVariable int id, @RequestBody Book newBook) {
+
+        if (repository.findById(id) == null) return " No book available for that id";
         repository.findById(id).map(book-> {
             book.setId(newBook.getId());
             book.setAuthorName(newBook.getAuthorName());
@@ -45,7 +47,6 @@ public class BookController {
             return repository.save(book);
         });
         return "book updated with id : " + id;
-
     }
 
 }
