@@ -32,6 +32,8 @@ public class BookController {
 
     @DeleteMapping("/delete/{id}")
     public String deleteBook(@PathVariable int id) {
+
+        if(repository.findById(id) == null) return "No book found for deletion for this id";
         repository.deleteById(id);
         return "book deleted with id : " + id;
     }
