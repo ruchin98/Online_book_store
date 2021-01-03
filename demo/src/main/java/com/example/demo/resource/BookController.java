@@ -16,6 +16,7 @@ public class BookController {
 
     @PostMapping("/addBook")
     public String saveBook(@RequestBody Book book) {
+        if(repository.findById(book.getId()) != null) return "book with that id already exists";
         repository.save(book);
         return "Added book with id : " + book.getId();
     }
